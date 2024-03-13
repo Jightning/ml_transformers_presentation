@@ -1,0 +1,96 @@
+{
+    "SlideShow1": [
+        {
+            "id": 1, 
+            "title": "Intro Slide",
+            "type": "image",
+            "imageUrl": "/slides/slide1.png"
+        },
+        {
+            "id": 2, 
+            "title": "What is Machine Learning",
+            "type": "image",
+            "imageUrl": "/slides/slide2.png"
+        },
+        {
+            "id": 3, 
+            "title": "Monkey See, Monkey Do",
+            "type": "image",
+            "imageUrl": "/slides/slide3.png"
+        },
+        {
+            "id": 4, 
+            "title": "Example Time!",
+            "type": "image",
+            "imageUrl": "/slides/slide4.png"
+        },
+        {
+            "id": 5, 
+            "title": "It's You!",
+            "type": "peopleCam"
+        },
+        {
+            "id": 6, 
+            "title": "It's A Photo of You!",
+            "type": "sampleImage"
+        },
+        {
+            "id": 7,
+            "title": "How Can a Computer Identify You?",
+            "type": "slideWithDynamicImage",
+            "imageUrl": "/slides/slide5.png"
+        },
+        {
+            "id": 8,
+            "title": "The Picture is Now Numbers!",
+            "type": "imageArray"
+        },
+        {
+            "id": 9, 
+            "title": "Better Example",
+            "type": "image",
+            "imageUrl": "/slides/slide6.png"
+        },
+        {
+            "id": 10, 
+            "title": "Neural Networks",
+            "type": "image",
+            "imageUrl": "/slides/slide7.png"
+        },
+        {
+            "id": 11, 
+            "title": "NN In Action",
+            "type": "image",
+            "imageUrl": "/slides/slide8.png"
+        },
+        {
+            "id": 12, 
+            "title": "Transformers",
+            "type": "image",
+            "imageUrl": "/slides/slide9.png"
+        },
+        {
+            "id": 13, 
+            "title": "Why Transformers?",
+            "type": "image",
+            "imageUrl": "/slides/slide10.png"
+        },
+        {
+            "id": 14, 
+            "title": "Transformers Diagrams",
+            "type": "image",
+            "imageUrl": "/slides/slide11.png"
+        },
+        {
+            "id": 15, 
+            "title": "Transformers Example",
+            "type": "image",
+            "imageUrl": "/slides/slide12.png"
+        },
+        {
+            "id": 16, 
+            "title": "Partially Transformered Image",
+            "type": "partiallyTransformedImage"
+        }
+    ]
+}
