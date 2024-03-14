@@ -24,10 +24,42 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  
+  user-select: none;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+.arrow {
+  padding: 1rem 0.7rem 1rem 1rem;
+  top: calc(50vh - 1rem);
+  position: absolute;
+  background-color: rgba(36, 38, 51, 0.731);
+  border-radius: 15px;
+}
+.arrow:hover {
+  cursor: pointer;
+}
+
+.capture-btn {
+  left: 36vw;
+  top: calc(50vh - 30px);
+  padding: 20px 20px 19px 20px;
+  border-radius: 20px;
+  background-color: rgba(36, 38, 51, 0.731);
+}
+.capture-btn:hover {
+  cursor: pointer;;
 }

@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image";
 
 import { SlideShow1 } from "@/slides.json"
@@ -9,10 +11,27 @@ import PartiallyTransformedImage from "@/components/PartiallyTransformedImage"
 import ProcessedImage from "@/components/ProcessedImage"
 import SampleImage from "@/components/SampleImage"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import StoreProvider from "@/components/redux/StoreProvider";
 
 export default function Home() {
   const [slideNumber, setSlideNumber] = useState(0)
+
+  useEffect(() => {
+    const handleMouseDown = (event: any) => {
+      if (event.key === "ArrowRight") {
+        handleSlideChange(1)
+      } else if (event.key === "ArrowLeft") {
+        handleSlideChange(-1)
+      }
+    } 
+    document.addEventListener("keydown", handleMouseDown)
+
+    return () => {
+      document.removeEventListener("keydown", handleMouseDown)
+    }
+  }, [])
 
   const types = ["peopleCam", "sampleImage", "slideWithDynamicImage", "imageArray", "partiallyTransformedImage"]
   const uniqueSlides = {
@@ -23,9 +42,38 @@ export default function Home() {
     [types[4]]: <ProcessedImage />,
   }
 
+  const handleSlideChange = (change: number) => {
+    setSlideNumber((num) => {
+      let finalNum = num + change
+      if (finalNum < 0 || finalNum >= SlideShow1.length) {
+        return num
+      }
+      return finalNum
+    })
+  }
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <span></span>
+    <main className="">
+      {slideNumber > 0 ? <span onClick={() => (handleSlideChange(-1))} className="material-symbols-outlined left-0 arrow">arrow_back_ios</span> : ""}
+      
+      {(() => {
+        const slide = SlideShow1[slideNumber]
+        if (slide.type === "image") {
+          return (
+            <Image height={720} width={960} alt="slide" src={String(slide.imageUrl)}
+            className={"rounded-lg relative border-2 border-white m-auto top-1 " + (slide.rounded && "rounded-full")} />
+          )
+        } else {
+          return (
+            <StoreProvider>              
+              <div className="relative h-fit w-fit m-auto top-1">{uniqueSlides[slide.type]}</div>
+            </StoreProvider>
+          )
+        }
+        return <></>
+      })()}
+
+      {slideNumber < SlideShow1.length - 1 ? <span onClick={() => (handleSlideChange(1))} className="material-symbols-outlined right-0 arrow">arrow_forward_ios</span> : ""}
     </main>
   );
 }

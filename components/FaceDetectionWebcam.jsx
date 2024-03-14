@@ -210,15 +210,13 @@ function FaceDetectionWebcam() {
                 className="output_canvas"
                 style={{
                     position: "absolute",
-                    marginLeft: "auto",
-                    marginRight: "auto",
                     left: -dimen[0]/2,
-                    right: -dimen[1]/2,
                     textAlign: "center",
                     zindex: 9,
                     width: dimen[0],
                     height: dimen[1],
-                    border: "white"
+                    border: "solid white",
+                    borderRadius: "15px"
                 }}
                 ></canvas>
             </div>

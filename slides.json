@@ -4,7 +4,8 @@
             "id": 1, 
             "title": "Intro Slide",
             "type": "image",
-            "imageUrl": "/slides/slide1.png"
+            "imageUrl": "/slides/slide1.png",
+            "rounded": true
         },
         {
             "id": 2, 
