@@ -33,13 +33,14 @@ export default function Home() {
     }
   }, [])
 
-  const types = ["peopleCam", "sampleImage", "slideWithDynamicImage", "imageArray", "partiallyTransformedImage"]
+  const types = ["peopleCam", "sampleImage", "slideWithDynamicImage", "bw-img", "imageArray", "partiallyTransformedImage"]
   const uniqueSlides = {
     [types[0]]: <FaceDetectionWebcam />,
     [types[1]]: <SampleImage />,
     [types[2]]: <DynamicSlides />,
-    [types[3]]: <ImageArrayDisplay />,
-    [types[4]]: <ProcessedImage />,
+    [types[3]]: <PartiallyTransformedImage />,
+    [types[4]]: <ImageArrayDisplay />,
+    [types[5]]: <ProcessedImage />,
   }
 
   const handleSlideChange = (change: number) => {
@@ -61,19 +62,19 @@ export default function Home() {
         if (slide.type === "image") {
           return (
             <Image height={720} width={960} alt="slide" src={String(slide.imageUrl)}
-            className={"rounded-lg relative border-2 border-white m-auto top-1 " + (slide.rounded && "rounded-full")} />
+            className={"z-0 slide rounded-lg relative border-2 border-white m-auto " + (slide.rounded && "rounded-full")} />
           )
         } else {
           return (
             <StoreProvider>              
-              <div className="relative h-fit w-fit m-auto top-1">{uniqueSlides[slide.type]}</div>
+              <div className="z-0 h-fit w-fit unique-slide m-auto">{uniqueSlides[slide.type]}</div>
             </StoreProvider>
           )
         }
         return <></>
       })()}
 
-      {slideNumber < SlideShow1.length - 1 ? <span onClick={() => (handleSlideChange(1))} className="material-symbols-outlined right-0 arrow">arrow_forward_ios</span> : ""}
+      {slideNumber < SlideShow1.length - 1 ? <span onClick={() => (handleSlideChange(1))} className="material-symbols-outlined z-20 right-0 arrow">arrow_forward_ios</span> : ""}
     </main>
   );
 }

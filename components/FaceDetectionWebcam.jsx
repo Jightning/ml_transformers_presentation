@@ -22,6 +22,7 @@ function FaceDetectionWebcam() {
     let dimen = [720, 540]
     var camera = null;
     const [isNewImage, setIsNewImage] = useState(false)
+    const [detection, setDetection] = useState(0)
 
     const dispatch = useAppDispatch()
 
@@ -88,6 +89,7 @@ function FaceDetectionWebcam() {
                 })
                 // canvasCtx.strokeRect(detection.boundingBox.originX, detection.boundingBox.originY, detection.boundingBox.width, detection.boundingBox.height)
             }
+            canvasCtx.filter = 'blur(1000px)';
             canvasCtx.restore();
         } 
     }
@@ -138,18 +140,19 @@ function FaceDetectionWebcam() {
         if (typeof webcamRef.current !== "undefined" && webcamRef.current !== null) {
             camera = new cam.Camera(webcamRef.current.video, {
                 onFrame: async () => {
-                    
                     if (faceLandmarker && handLandmarker && faceDetector && webcamRef.current && webcamRef.current.video !== null) {                    
-                        // detect hand
-                        const handLandmarkerResult = handLandmarker.detect(webcamRef.current.video);
-                        draw(handLandmarkerResult, true)
-                    
-                        // detect face
-                        // const faceLandmarkerResult = faceLandmarker.detect(webcamRef.current.video);
-                        // draw(faceLandmarkerResult, false)
-
-                        const faceDetectionResult = faceDetector.detect(webcamRef.current.video);
-                        drawBoundingBoxes(faceDetectionResult, false)
+                        if (detection === 0) {
+                            const faceDetectionResult = faceDetector.detect(webcamRef.current.video);
+                            drawBoundingBoxes(faceDetectionResult, false)
+                        } else if (detection == 1) {
+                            //detect face
+                            const faceLandmarkerResult = faceLandmarker.detect(webcamRef.current.video);
+                            draw(faceLandmarkerResult, false)
+                        } else {
+                            // detect hand
+                            const handLandmarkerResult = handLandmarker.detect(webcamRef.current.video);
+                            draw(handLandmarkerResult, true)
+                        }
                     }   
                 },
                 width: dimen[0],
@@ -158,11 +161,17 @@ function FaceDetectionWebcam() {
             camera.start();
         }
 
+        document.addEventListener("keydown", (event) => {
+            if (event.key === " ") {
+                setIsNewImage(true)
+            }
+        })
+
         return () => {
             camera.stop()
         }
 
-    }, []);
+    }, [detection]);
 
     useEffect(() => {
             if (isNewImage) {
@@ -188,7 +197,11 @@ function FaceDetectionWebcam() {
                   canvasElement.width,
                   canvasElement.height
                 );
+                console.log(canvasElement.height, canvasElement.width)
+            
+                // console.log(canvasCtx.getImageData(0, 0, canvasElement.width, canvasElement.height))
                 const imageSrc = spareCanvasRef.current.toDataURL('image/png');
+                const imgData = canvasCtx.getImageData(0, 0, canvasElement.width, canvasElement.height)
 
                 dispatch(newSampleImage([imageSrc, canvasRef.current.toDataURL('image/png')]))
                 setIsNewImage(false)
@@ -196,9 +209,9 @@ function FaceDetectionWebcam() {
     }, [isNewImage])
 
     return (
-        <center>
-            <canvas ref={spareCanvasRef} className="hidden"></canvas>
-            <div className="camera absolute">
+        <div>
+            <canvas ref={spareCanvasRef} className="hidden absolute top-1"></canvas>
+            <div className="absolute">
                 <Webcam
                     ref={webcamRef}
                     audio={false}
@@ -207,10 +220,9 @@ function FaceDetectionWebcam() {
                 />
                 <canvas
                 ref={canvasRef}
-                className="output_canvas"
+                className="unique-slide"
                 style={{
                     position: "absolute",
-                    left: -dimen[0]/2,
                     textAlign: "center",
                     zindex: 9,
                     width: dimen[0],
@@ -221,10 +233,26 @@ function FaceDetectionWebcam() {
                 ></canvas>
             </div>
 
-            <div onClick={() => 
-                {   console.log("CHANGING")
-                    setIsNewImage(true)}} className="absolute border-2 border-white capture-btn"><span className="material-symbols-outlined">photo_camera</span></div>
-        </center>
+            <span 
+            onClick={() => {
+                setDetection((detect) => {
+                    if (detect === 2) {
+                        return 0
+                    }
+                    return detect + 1
+                })
+            }}  
+            className="material-symbols-outlined model-cycle"
+            >cycle</span>
+
+            <span 
+                onClick={() => {   
+                    setIsNewImage(true)
+                }}
+                className="absolute border-2 border-white capture-btn material-symbols-outlined">photo_camera</span>
+
+
+        </div>
     );
 }
 

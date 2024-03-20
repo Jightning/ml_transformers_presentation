@@ -43,55 +43,72 @@
         },
         {
             "id": 8,
+            "title": "Black and White Image",
+            "type": "bw-img"
+        },
+        {
+            "id": 9,
             "title": "The Picture is Now Numbers!",
             "type": "imageArray"
         },
         {
-            "id": 9, 
+            "id": 10, 
             "title": "Better Example",
             "type": "image",
             "imageUrl": "/slides/slide6.png"
         },
         {
-            "id": 10, 
+            "id": 11, 
             "title": "Neural Networks",
             "type": "image",
             "imageUrl": "/slides/slide7.png"
         },
         {
-            "id": 11, 
+            "id": 12, 
             "title": "NN In Action",
             "type": "image",
             "imageUrl": "/slides/slide8.png"
         },
         {
-            "id": 12, 
+            "id": 13, 
             "title": "Transformers",
             "type": "image",
             "imageUrl": "/slides/slide9.png"
         },
         {
-            "id": 13, 
+            "id": 14, 
             "title": "Why Transformers?",
             "type": "image",
             "imageUrl": "/slides/slide10.png"
         },
         {
-            "id": 14, 
+            "id": 15, 
             "title": "Transformers Diagrams",
             "type": "image",
             "imageUrl": "/slides/slide11.png"
         },
         {
-            "id": 15, 
+            "id": 16, 
             "title": "Transformers Example",
             "type": "image",
             "imageUrl": "/slides/slide12.png"
         },
         {
-            "id": 16, 
+            "id": 17, 
+            "title": "Closer Look into Transformers Model",
+            "type": "image",
+            "imageUrl": "/slides/slide13.png"
+        },
+        {
+            "id": 18, 
             "title": "Partially Transformered Image",
             "type": "partiallyTransformedImage"
+        },
+        {
+            "id": 19, 
+            "title": "Thank You!",
+            "type": "image",
+            "imageUrl": "/slides/slide14.png"
         }
     ]
 }
